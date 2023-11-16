@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+bool cmp(pair<double, pair<ll, ll>> a, pair<double, pair<ll, ll>> b){
+	if(a.first != b.first) return a.first < b.first;
+	return a.second.first > b.second.first;
+}
+
+int main()
+{
+   	ll n, w;
+   	cin >> n >> w;
+    vector<pair<double, pair<ll, ll>>> vpp(n);
+   	for(int i = 0; i < n; i++){
+   		cin >> vpp[i].second.first;
+   	}
+   	for(int i = 0; i < n; i++){
+   		cin >> vpp[i].second.second;
+   	}
+   	for(int i = 0; i < n; i++){
+   		double ratio = (vpp[i].second.first / vpp[i].second.second);
+   		vpp[i].first = ratio;
+   	}
+   	sort(vpp.rbegin(), vpp.rend(), cmp);
+   	ll profit = 0;
+   	for(int i = 0; i < n; i++){
+   		if(vpp[i].second.second > w){
+   			profit += w * vpp[i].first;
+   			w = 0;
+   			break;
+   		} else {
+   			profit += vpp[i].second.first;
+   			w -= vpp[i].second.second;
+   		}
+   	}
+   	cout << "profit " << profit << endl;
+}

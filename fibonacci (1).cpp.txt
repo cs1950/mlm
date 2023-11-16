@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int fibRec(int n){
+	if(n <= 1) return n;
+	return fibRec(n-1) + fibRec(n-2);
+}
+
+int fibRecOp(int n, map<int, int> &m){
+	if(n <= 1) return n;
+	if(m.find(n)!=m.end()){
+		return m[n];
+	}
+	return m[n] = fibRecOp(n-1, m) + fibRecOp(n-2, m);
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	cout << fibRec(n) << endl;
+	map<int, int> m;
+	cout << fibRecOp(n, m) << endl;
+}
